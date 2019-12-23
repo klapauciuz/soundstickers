@@ -1,2 +1,4 @@
 # soundstickers_bot
-telegram bot for sound stickers sending 
+samples is getting from https://www.freesound.org/
+
+type ```@soundstickers_bot``` and select sound or add your query to search in the sound database
