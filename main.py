@@ -9,7 +9,7 @@ import datetime
 
 def on_inline_query(msg):
 	query_id, from_id, query_string = telepot.glance(msg, flavor='inline_query')
-	print(datetime.datetime.now())
+	# print(datetime.datetime.now())
 	print('Inline Query:', query_id, from_id, query_string)
 	if query_string:
 		articles = []
@@ -30,7 +30,7 @@ def on_inline_query(msg):
 				audio_url='https://www.freesound.org' + mp3['href'],
 			   ))
 		bot.answerInlineQuery(query_id, articles, 0)
-	 else:
+	else:
 		articles = []
 		articles = [InlineQueryResultAudio(
 						 id='0',
@@ -122,8 +122,8 @@ def on_chosen_inline_result(msg):
 
 def on_chat_message(msg):
 	content_type, chat_type, chat_id = telepot.glance(msg)
-	print(datetime.datetime.now())
-	print('someone wants to chat and wrote this...:')
+	# print(datetime.datetime.now())
+	# print('someone wants to chat and wrote this...:')
 	print(msg['text'])
 	if msg['text'] == '/help' or msg['text'] == '/start':
 		bot.sendMessage(chat_id, 'Hey. Call me from your chats by typing `@soundstickers_bot` in the message field. You will see a list of default sound stickers that you can send to chat.\n\nAlso you can just type name of any other sound, like `@soundstickers_bot meow` or `@soundstickers_bot bird` to upload and send sounds from freesound.org.\n\nHave fun!', parse_mode='Markdown')
