@@ -13,7 +13,7 @@ def on_inline_query(msg):
 	print('Inline Query:', query_id, from_id, query_string)
 	if query_string:
 		articles = []
-		r = requests.get('https://www.freesound.org/search/?q='+query_string+'&f=type%3Amp3+duration%3A%5B2+TO+10%5D&s=score+desc&advanced=1&g=')
+		r = requests.get('https://www.freesound.org/search/?q='+query_string+'&f=type%3Amp3+duration%3A%5B2+TO+10%5D&s=score+desc&advanced=1&g=', headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'})
 		print(r.status_code)
 		mp3s = BeautifulSoup(r.text, "lxml").find_all('a', class_='mp3_file')
 		for mp3 in mp3s:
@@ -124,9 +124,14 @@ def on_chat_message(msg):
 	content_type, chat_type, chat_id = telepot.glance(msg)
 	print(datetime.datetime.now())
 	print('someone wants to chat and wrote this...:')
-	print(msg['text'])
-	if msg['text'] == '/help' or msg['text'] == '/start':
-		bot.sendMessage(chat_id, 'Hey. Call me from your chats by typing `@soundstickers_bot` in the message field. You will see a list of default sound stickers that you can send to chat.\n\nAlso you can just type name of any other sound, like `@soundstickers_bot meow` or `@soundstickers_bot bird` to upload and send sounds from freesound.org.\n\nHave fun!', parse_mode='Markdown')
+	if msg['from']['id'] == 511868013 or msg['from']['id'] == 1183071984:
+		print('spam!')
+		pass
+	else:
+		print('other msg')
+		# print(msg['text'])
+		if msg['text'] == '/help' or msg['text'] == '/start':
+			bot.sendMessage(chat_id, 'Hey. Call me from your chats by typing `@soundstickers_bot` in the message field. You will see a list of default sound stickers that you can send to chat.\n\nAlso you can just type name of any other sound, like `@soundstickers_bot meow` or `@soundstickers_bot bird` to upload and send sounds from freesound.org.\n\nHave fun!', parse_mode='Markdown')
 
 
 bot = telepot.Bot(TOKEN)
